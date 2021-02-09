@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Button, Form, FormControl, Nav} from "react-bootstrap";
+import {Button, Form, FormControl, Nav,Navbar} from "react-bootstrap";
 
-class Navbar extends Component {
+class SampleNavbar extends Component {
     render() {
         return (
             <div className="App">
@@ -25,4 +25,4 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar;
+export default SampleNavbar;
