@@ -12,9 +12,72 @@ import {
     MDBInput
 } from 'mdbreact';
 import "../css/Login.css";
+import {serverUrl} from "./config";
+import axios from "axios";
+import {toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {Form} from "react-bootstrap";
 
+toast.configure();
 
 class Login extends Component {
+    constructor(props) {
+        super(props);
+
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChangeUsername = this.onChangeUsername.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
+
+        this.state = {
+            username: "",
+            password: "",
+        };
+    }
+
+    onChangeUsername(event){
+        this.setState({
+            username: event.target.value,
+            [event.target.name]: event.target.value
+
+        })
+    }
+
+    onChangePassword(event){
+        this.setState({
+            password: event.target.value,
+            [event.target.name]: event.target.value
+
+        })
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+
+        const users = {
+            username: this.state.username,
+            password: this.state.password,
+        };
+        axios
+            .post(serverUrl + "/users/", users)
+            .then((response) => {
+
+                console.log(users);
+                toast("Login Successful! ");
+                console.log("User logged!")
+                setTimeout(() => {
+                    window.location = "/";
+                }, 5000);
+            })
+            .catch((error) => {
+                console.log(error.response);
+                toast("Please Check Username or Password");
+                this.setState({
+                    password: "",
+                });
+            });
+    }
+
+
     state = {
         collapseID: ''
     };
@@ -66,14 +129,19 @@ class Login extends Component {
                             <MDBCol md='6' xl='5' className='mb-4'>
                                 <MDBCard className='dark-grey-text'>
                                     <MDBCardBody className='z-depth-2'>
+                                        <Form onSubmit={this.onSubmit} >
                                         <h3 className='dark-grey-text text-center'>
                                             <strong>Login</strong>
                                         </h3>
                                         <hr />
-                                        <MDBInput label='Email' icon='user' type="email" />
-                                        <MDBInput label='Password' icon='envelope' />
+                                        <MDBInput label='Username' icon='user' type="text" onChange={this.onChangeUsername}
+                                                  value={this.state.username} name="username"
+                                                  required  />
+                                        <MDBInput label='Password' icon='envelope' type="password" onChange={this.onChangePassword}
+                                                  value={this.state.password} name="password"
+                                                  required />
                                         <div className='text-center mt-3 black-text'>
-                                            <MDBBtn color='indigo'>Send</MDBBtn>
+                                            <MDBBtn color='indigo' type="submit">Login</MDBBtn>
                                             <MDBBtn color='indigo'>Send</MDBBtn>
                                             <br/>
                                             <br/>
@@ -91,6 +159,7 @@ class Login extends Component {
                                                 </div>
                                             </MDBModalFooter>
                                         </div>
+                                        </Form>
                                     </MDBCardBody>
                                 </MDBCard>
                             </MDBCol>
@@ -98,61 +167,6 @@ class Login extends Component {
                     </MDBContainer>
                 </MDBView>
             </div>
-
-            // <MDBContainer>
-            //     <MDBRow>
-            //         <MDBCol md="6">
-            //             <MDBCard>
-            //                 <MDBCardBody>
-            //                     <form>
-            //                         <p className="h4 text-center py-4">Sign up</p>
-            //                         <div className="grey-text">
-            //                             <MDBInput
-            //                                 label="Your name"
-            //                                 icon="user"
-            //                                 group
-            //                                 type="text"
-            //                                 validate
-            //                                 error="wrong"
-            //                                 success="right"
-            //                             />
-            //                             <MDBInput
-            //                                 label="Your email"
-            //                                 icon="envelope"
-            //                                 group
-            //                                 type="email"
-            //                                 validate
-            //                                 error="wrong"
-            //                                 success="right"
-            //                             />
-            //                             <MDBInput
-            //                                 label="Confirm your email"
-            //                                 icon="exclamation-triangle"
-            //                                 group
-            //                                 type="text"
-            //                                 validate
-            //                                 error="wrong"
-            //                                 success="right"
-            //                             />
-            //                             <MDBInput
-            //                                 label="Your password"
-            //                                 icon="lock"
-            //                                 group
-            //                                 type="password"
-            //                                 validate
-            //                             />
-            //                         </div>
-            //                         <div className="text-center py-4 mt-3">
-            //                             <MDBBtn color="cyan" type="submit">
-            //                                 Register
-            //                             </MDBBtn>
-            //                         </div>
-            //                     </form>
-            //                 </MDBCardBody>
-            //             </MDBCard>
-            //         </MDBCol>
-            //     </MDBRow>
-            // </MDBContainer>
         );
     }
 }

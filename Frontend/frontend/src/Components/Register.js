@@ -173,7 +173,7 @@ class Register extends Component {
                             <MDBCol md='6' xl='5' className='mb-4'>
                                 <MDBCard className='dark-grey-text'>
                                     <MDBCardBody className='z-depth-2'>
-                                        <Form onSubmit={this.onSubmit} c>
+                                        <Form onSubmit={this.onSubmit} >
                                         <h3 className='dark-grey-text text-center'>
                                             <strong>Sign Up</strong>
                                         </h3>
