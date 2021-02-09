@@ -1,0 +1,10 @@
+body, html {
+    height: 100%;
+}
+.bg {
+    background-image: url("https://www.wallpapertip.com/wmimgs/11-117994_light-purple-background.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

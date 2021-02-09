@@ -5,6 +5,7 @@ import HomePage from "./Components/HomePage";
 import SampleNavbar from "./Components/Navbar"
 import Login from "./Components/Login";
 import Register from "./Components/Register";
+import Footer from "./Components/Footer";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route exact path="/register" component={Register}/>
 
             </Switch>
+                <Footer/>
             </BrowserRouter>
         </div>
     );

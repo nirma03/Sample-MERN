@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 
+import "../css/BackgroundImage.css"
 
 class HomePage extends Component {
     render() {
         return (
-            <div>
-                <p>Hello World!</p>
-            </div>
+            <div className="bg"></div>
         );
     }
 }
